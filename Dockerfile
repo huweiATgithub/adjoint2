@@ -5,7 +5,7 @@
 # to include HSL
 #
 # One request for a download at: http://hsl.rl.ac.uk/ipopt
-# Auther:
+# Author:
 # HU, Wei <whuae@connect.ust.hk>
 
 # FENICS_HOME is the home directory defined in fenicsproject docker
@@ -26,10 +26,11 @@ RUN apt-get -qq update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN pip3 install --upgrade pip && pip3 install --no-cache-dir --ignore-installed scipy
 
+# compile ipopt against hsl
 COPY --chown=fenics dolfin-adjoint.conf $FENICS_HOME/dolfin-adjoint.conf
 COPY --chown=fenics coinhsl.tar.gz $FENICS_HOME/coinhsl.tar.gz
 ARG IPOPT_VER=3.12.9
-RUN /bin/bash -l -c "source $FENICS_HOME/dolfin-adjoint.conf && \
+RUN /bin/bash -c "source $FENICS_HOME/dolfin-adjoint.conf && \
                      update_ipopt && \
                      update_pyipopt"
                      
