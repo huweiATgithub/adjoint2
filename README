@@ -1,0 +1,14 @@
+Modify the code in:
+  https://bitbucket.org/dolfin-adjoint/pyadjoint/src/2019.1.0/docker/fenics/stable
+
+Change logs:
+add package file, suggested in compilation of ipopt
+upgrade pip, otherwise it will show warning each time calling it.
+remove unnecessary fenics_prefix as we install ipopt in /usr/local
+configure installation of ipopt and pyipopt to use hsl
+
+To use, git clone and docker build ., remember to put source code of hsl in it.
+to check:
+1. in source code of ipopt, do make test
+2. in pyipopt_dir/examples, change .py file to python3 version, run it.
+3. git clone --branch=2019.1.0 --depth=1 https://bitbucket.org/dolfin-adjoint/pyadjoint.git, in tests and examples, run those .py files.
